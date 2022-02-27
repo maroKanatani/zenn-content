@@ -1,3 +1,2 @@
-# Zenn CLI
-
-* [📘 How to use](https://zenn.dev/zenn/articles/zenn-cli-guide)
+# 👤Author
+[maroKanatani](https://zenn.dev/marokanatani)
