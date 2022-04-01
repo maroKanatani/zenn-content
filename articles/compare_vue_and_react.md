@@ -239,8 +239,9 @@ Vueは`.vue`という独自のフォーマットで記述します。
 
 また、この独自のフォーマットがあるからか、末端部分でのTypeScriptのサポートに個人的には物足りなさを感じてしまいます。
 
-例えばTypeScriptの構文を以下のようにtemplate部分で使用するとSyntax Errorが発生します。
-template部分はTypeScriptとして解釈されないみたいです。
+~~例えばTypeScriptの構文を以下のようにtemplate部分で使用するとSyntax Errorが発生します。~~
+~~template部分はTypeScriptとして解釈されないみたいです。~~
+  - 2022/04/01 追記) scriptの方にsetupが抜けておりました。Vue3から以下のような構文で補完ができそうです。
 
 ```vue
 <template>
@@ -248,7 +249,7 @@ template部分はTypeScriptとして解釈されないみたいです。
   <button @click="handleClick(message!)"></button>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import { ref } from "vue"
 
 const message = ref<string|undefined>(undefined);
