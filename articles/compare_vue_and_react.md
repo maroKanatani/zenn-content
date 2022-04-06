@@ -245,7 +245,6 @@ Vueは`.vue`という独自のフォーマットで記述します。
 
 ```vue
 <template>
-  <!-- Syntax Error -->
   <button @click="handleClick(message!)"></button>
 </template>
 
