@@ -10,6 +10,13 @@ published: false
 下書きです
 :::
 
+
+```
+$ cdk --version
+2.20.0 (build 738ef49)
+```
+
+
 考える仕様
 - 単一のS3オブジェクトをダウンロードする
 - 選択した複数のS3オブジェクトをまとめてダウンロード
@@ -30,3 +37,6 @@ published: false
     望ましいのは多分S3イベントで圧縮するパターン？
   
 
+参考
+App Runner on CDK
+https://dev.classmethod.jp/articles/cdk-app-runner/
