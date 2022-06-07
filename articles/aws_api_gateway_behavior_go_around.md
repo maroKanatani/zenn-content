@@ -3,7 +3,7 @@ title: "API Gateway × Lambdaの設定による挙動の違いを見ていく"
 emoji: "🔎"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["aws", "apigateway", "lambda", "serverless", "serverlessframewor"]
-published: false
+published: true
 ---
 
 Serverless Frameworkでバックエンドを構築した際、API Gatewayの設定によって色々ハマったので調査してみました🔎
