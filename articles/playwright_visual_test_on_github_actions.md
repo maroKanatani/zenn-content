@@ -262,7 +262,7 @@ jobs:
 
 https://github.com/microsoft/playwright/issues/6500
 
-Github側に問題があって私達には解決できない問題とのことで、`$HOME=/root`を指定してコマンドを実行することで回避できるそうです。
+Github側に問題があって私達には解決できない問題とのことで、`HOME=/root`を指定してコマンドを実行することで回避できるそうです。
 これを付与してとりあえずは各種ブラウザでテストが成功していることを確認できました。
 
 ```diff yml:.github/workflows/playwright.yml
