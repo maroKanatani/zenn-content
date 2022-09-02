@@ -3,7 +3,7 @@ title: "Page Object Modelでフロントエンドのテストを書いてみる"
 emoji: "🎭"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["test", "playwright", "frontend"]
-published: false
+published: true
 ---
 
 Playwrightのドキュメントを眺めていると`Page Object Model`という実装パターンがあり、これが便利そうだと思ったので愚直に実装したパターンとじっくり見比べてみたいと思いました。
