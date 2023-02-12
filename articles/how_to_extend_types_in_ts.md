@@ -1,6 +1,6 @@
 ---
 title: "既存のTypeScriptの型を拡張する際に考えたこと"
-emoji: "📝"
+emoji: "🧩"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["typescript"]
 published: true
