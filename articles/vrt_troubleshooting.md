@@ -36,6 +36,23 @@ Loading 状態の Story を再現するために mws で `delay("infinite")` を
 
 https://blog.wadackel.me/2022/vrt-performance-optimize/
 
+```ts
+export const Loading: Story = {
+  parameters: {
+    msw: {
+      handlers: [
+        rest.all(`*`, (_req, res, ctx) => {
+          return res(ctx.delay("infinite"));
+        }),
+      ],
+    },
+    screenshot: {
+      skip: true, // 追加
+    },
+  },
+};
+```
+
 ## Storybookでchunk load errorが発生する
 Storybook 起動後、`storycap` でスクリーンショットを取得しようとする際、`chunk load error` が発生することがありました。
 最終的には以下の記事を参考にチャンク分けを無効にする処理を入れたことで安定するようになりました。
