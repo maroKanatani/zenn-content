@@ -104,14 +104,3 @@ VRT はかなり効果的なテスト手法である一方、閾値のチュー�
 新しい課題があれば可能な限り随時追記していく予定です。  
 本記事が少しでも読者の皆様のお役に立てば幸いです🙇‍♂  
 
-
-<!-- waitFor関連？
-https://qiita.com/Quramy/items/d332e37dded505daac90
-
-https://circleci.com/developer/ja/images/image/cimg/node -->
-
-
-<!-- ## viewportを設定しているにも関わらず、ときどきモバイルレイアウトでスクリーンショットが取得される
-storycapやpuppeteerのオプションを見直したら直った。（viewportchange delayとかの影響？）
-マシンパワーが弱い？ -->
-
