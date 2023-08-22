@@ -1,5 +1,5 @@
 ---
-title: "私がVisual Regression Testを導入する際にハマったこと & 回避策"
+title: "Visual Regression Testを導入する際にハマったこと & 回避策"
 emoji: "🧪"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["test", "storybook", "vrt", "frontend", "react"]
