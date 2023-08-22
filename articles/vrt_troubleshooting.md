@@ -30,8 +30,8 @@ VRT 導入前はスナップショットテストを行っていた（現在も�
 
 # 実際に直面したハマりどころ
 
-## mwsで `delay("infinite")` しているとstorycapでのスクリーンショット取得時にtimeoutしてしまう
-Loading 状態の Story を再現するために mws で `delay("infinite")` を使ってレスポンスを待機させていたのですが、この状態で storycap を使うと timeout してしまい、スクリーンショットが取得できなかったです。
+## mswで `delay("infinite")` しているとstorycapでのスクリーンショット取得時にtimeoutしてしまう
+Loading 状態の Story を再現するために msw で `delay("infinite")` を使ってレスポンスを待機させていたのですが、この状態で storycap を使うと timeout してしまい、スクリーンショットが取得できなかったです。
 最終的にはこういったパターンの場合は `skip` 等で除外するようにしたり、以下の記事にあるような zx のスクリプトを実装し、該当するパターンを除外するしてから `storycap` に渡すようにしました。
 
 https://blog.wadackel.me/2022/vrt-performance-optimize/
