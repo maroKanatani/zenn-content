@@ -59,7 +59,7 @@ Storybook 起動後、`storycap` でスクリーンショットを取得しよ�
 
 https://support.invisionapp.com/docs/troubleshooting-chunkloaderror-in-dsm-storybook
 
-```ts
+```ts:.storybook/main.ts
 /**
  * Storybookでchunk load errorが発生するのを防ぐ。
  * Disables Webpack from splitting the code into chunks
