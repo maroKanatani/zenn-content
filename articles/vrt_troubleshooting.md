@@ -59,6 +59,34 @@ Storybook 起動後、`storycap` でスクリーンショットを取得しよ�
 
 https://support.invisionapp.com/docs/troubleshooting-chunkloaderror-in-dsm-storybook
 
+```ts
+/**
+ * Storybookでchunk load errorが発生するのを防ぐ。
+ * Disables Webpack from splitting the code into chunks
+ * @param config - The webpack config to update
+ * @see https://support.invisionapp.com/docs/troubleshooting-chunkloaderror-in-dsm-storybook
+ */
+function disableChunkSplitting(config: Configuration) {
+  config.optimization = { splitChunks: { chunks: "async" } };
+  config.output = { ...config.output, chunkFilename: "[chunkhash].chunk.js" };
+  config.plugins?.push(
+    new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 1 })
+  );
+
+  return config;
+}
+
+const config: StorybookConfig = {
+  // ...
+  webpackFinal: async (config) => {
+    // ...
+    return disableChunkSplitting(config);
+  },
+  // ...
+};
+export default config;
+```
+
 ## rechartsのグラフ描画の終了を待たずにスクリーンショットが取得される
 グラフライブラリに recharts を使っているのですが、グラフ描画時のアニメーションが終わる前にスクリーンショットが取得されてしまうことがありました。
 storycap のドキュメントを見ていると `--disableCssAnimation` あり、最初はこれを設定すればよいかと考えたのですが、どうも SVG アニメーションはこの設定では無効にできないようでした。
