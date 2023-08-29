@@ -7,11 +7,11 @@ published: false
 ---
 
 # はじめに
-[フロントエンド開発のためのテスト入門](https://www.amazon.co.jp/dp/4798178187)を参考にVisual Regression Testを導入しました。  
+[フロントエンド開発のためのテスト入門](https://www.amazon.co.jp/dp/4798178187)を参考に Visual Regression Test を導入しました。  
 
-段階的に VRT を学ぶことができ大変参考にさせていただいた一方で、本文中にもありますがAWSインフラの設定等は基礎的な構成となっているので、実務で導入するにあたっていくつか設定を入れました。  
+段階的に VRT を学ぶことができ大変参考にさせていただいた一方で、本文中にもありますが AWS インフラの設定等は基礎的な構成となっているので、実務で導入するにあたっていくつか設定を入れました。  
 
-本記事では具体的にどういった設定を行ったのかを列挙していきます。  
+本記事では具体的にどういった設定をしたのかを列挙していきます。  
 
 参考までに `Terraform` のコードを貼っておきますが、バージョンアップ等で古くなる可能性もあるので参考程度でお願いします。
 
@@ -20,7 +20,7 @@ published: false
 - Terraform AWS Provider 5.8.0
 
 :::details 最終的な構成
-VRT でのみ使用するインフラは`modules/vrt`のような形式でモジュール化しておき、環境毎に分離した main で呼ぶような構成にしています。  
+VRT でのみ使用するインフラは `modules/vrt` のような形式でモジュール化しておき、環境毎に分離した main で呼ぶような構成にしています。  
 基本的にはテスト用の環境なので、開発環境でのみ呼ぶようにします。
 
 - 環境毎のディレクトリ
@@ -304,7 +304,7 @@ jobs:
 https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/about-security-hardening-with-openid-connect
 
 ## 1. ID プロバイダと IAM ロールの作成
-まずは以下の記事をベースに ID プロバイダと IAM ロールの作成を行います。
+まずは以下の記事をベースに ID プロバイダと IAM ロールを作成します。
 https://zenn.dev/kou_pg_0131/articles/gh-actions-oidc-aws
 
 IAM ロールには [reg-publish-s3-plugin で必要なポリシー](https://github.com/reg-viz/reg-suit/blob/master/packages/reg-publish-s3-plugin/README.md#iam-role-policy)を設定する必要があります。
@@ -320,7 +320,7 @@ IAM ロールには [reg-publish-s3-plugin で必要なポリシー](https://git
       ]
   ```
 
-:::details Terraform で記述するとこんな感じ（IAMロール部分）
+:::details Terraform で記述するとこんな感じ（IAM ロール部分）
 ```tf iam.tf
 r# ------------------------------------------------------------------------------
 # VRT Role
@@ -382,7 +382,7 @@ data "aws_iam_policy_document" "vrt_github_actions" {
 
 ## 2. GitHub Secrets への登録
 IAM ロールが作成できたら GitHub Secrets に 1 で作成した IAM Role の ARN を設定します。
-（直参照が許容できるのであればそれでも良いと思います。）
+（直参照が許容できるのであればそれでも可です。）
 
 ![](/images/vrt_on_aws_infra/01_vrt-github-secrets.png =700x)
 
@@ -416,7 +416,7 @@ jobs:
 ```
 
 # S3へはCloudfront経由でのみアクセスするようにする
-S3 のアクセス周りは緩めに設定してしまうと何かと事故の元なので、Cloudfront経由のみでアクセスできるようにしておきます。
+S3 のアクセス周りは緩めに設定してしまうと何かと事故の元なので、Cloudfront 経由のみでアクセスできるようにしておきます。
 
 https://blog.flatt.tech/entry/s3_security
 
@@ -432,7 +432,7 @@ Cloudfront ディストリビューションと Cloudfront Origin Access Control
 ![](/images/vrt_on_aws_infra/oac.png =700x)
 *オリジンアクセスの設定例*
 
-:::details Terraform で記述するとこんな感じ（Cloudfront部分）
+:::details Terraform で記述するとこんな感じ（Cloudfront 部分）
 ```tf:cloudfront.tf
 resource "aws_cloudfront_distribution" "vrt" {
   origin {
@@ -494,7 +494,7 @@ https://zenn.dev/kou_pg_0131/articles/tf-cloudfront-oac
 
 
 ## 2. バケットポリシーの設定 & パブリックアクセスブロック
-`OAC` でアクセスできるように S3バケットにバケットポリシーを設定します。
+`OAC` でアクセスできるように S3 バケットにバケットポリシーを設定します。
 ![](/images/vrt_on_aws_infra/bucket-policy.png =700x)
 
 ここまででパブリックアクセスが不要になりますのでブロックしておきます。
@@ -545,7 +545,7 @@ Terraform で設定するとパブリックアクセスブロック等ある程�
 
 
 :::details 補足
-Terraform で OAI を削除しようとすると以下のようなエラーが発生することがあります。
+Terraform で OAI を削除しようとすると以下のようなエラーが発生することがあります。  
 
 ```
 ╷
@@ -553,7 +553,7 @@ Terraform で OAI を削除しようとすると以下のようなエラーが�
 │       status code: 409, request id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx
 ```
 
-関連付けがある状態の OAI を削除することはできないので、一旦別の OAI もしくは OAC へ関連付けを変更した状態で `terraform apply`を実行、その後 OAI が関連付いていない状態になるので、その状態でtfファイルから 既存のOAIの定義を削除し`terraform apply`を実行、というフローをたどる必要があります。
+関連付けがある状態の OAI を削除できないので、一旦別の OAI もしくは OAC へ関連付けを変更した状態で `terraform apply` を実行、その後 OAI が関連付いていない状態になるので、その状態で tf ファイルから既存の OAI の定義を削除し `terraform apply` を実行、というフローをたどる必要があります。
 :::
 
 # Basic認証を入れる
@@ -591,21 +591,22 @@ resource "aws_cloudfront_function" "basic_auth" {
 https://zenn.dev/kou_pg_0131/articles/tf-cloudfront-basicauth
 
 ## 余談: Amplify の採用を見送った話
-Basic認証が手軽に導入できる Web サイトホスティングといえば Amplify を使う方法もあります。  
-ただ、Amplifyを使うと基本的にコンテンツを格納する S3バケットが隠蔽されてしまい、GitHub Actionsから参照できない状態になりそうだったため、今回は採用を見送りました。  
-VRT を始めとしてデータレイク的にバケットにデータを都度追加していくようなケースには向いていないのかもしれません。  
-（ただ今後のアップデート等で変わったりすることはあるかもしれません。）
+Basic 認証が手軽に導入できる Web サイトホスティングといえば Amplify を使う方法もあります。  
+ただ、Amplify を使うと基本的にコンテンツを格納する S3 バケットが隠蔽されてしまい、GitHub Actions から参照できない状態になりそうだったため、今回は採用を見送りました。  
+VRT を始めとしてデータレイク的にバケットにデータを都度追加していくようなケースには向いていないかと思われます。  
+（今後のアップデート等で変わる可能性はあります。）
 
 # S3のライフサイクルルールを設定する
-VRT は実行の度に S3 にデータを追加していくので、長期間運用していると保存しているデータがどんどん増えていき、保管コストも徐々に大きくなっていきます。
-初期段階で設定しておく必要はないかもしれないですが、どこかのタイミングで設定しておくのがおすすめです。
+VRT は実行の都度 S3 にデータを追加していくので、長期間運用していると保存しているデータがどんどん増えていきます。  
+それに伴い保管コストも徐々に大きくなっていきます。
+初期段階で必ずしも設定しておく必要はないですが、どこかのタイミングで設定しておくのがおすすめです。
 
-ストレージクラスを変更するなど、やり方は色々考えられますが私が担当しているプロジェクトでは以下のように181日（約半年）経過したデータは自動で削除するように設定しました。ここはプロジェクトの状況によって適切なものを設定しましょう。
+ストレージクラスを変更するなど、やり方は色々考えられますが私が担当しているプロジェクトでは以下のように 181 日（約半年）経過したデータは自動で削除するように設定しました。ここはプロジェクトの状況によって適切なものを設定しましょう。
 
 ![](/images/vrt_on_aws_infra/02_s3-lifecycle.png =700x)
 *S3 ライフサイクルルールの設定例*
 
-:::details Terraform で記述するとこんな感じ（S3ライフサイクル部分）
+:::details Terraform で記述するとこんな感じ（S3 ライフサイクル部分）
 ```tf:s3.tf
 resource "aws_s3_bucket_lifecycle_configuration" "vrt" {
   bucket = aws_s3_bucket.vrt.id
@@ -634,7 +635,7 @@ S3 の URL が設定されていましたが、 Cloudfront の URL を参照す�
 ![](/images/vrt_on_aws_infra/cloudfront-url.png)
 
 ## 2. workflowの修正
-`vrt.yml`のenvに Cloudfront の URL を格納する環境変数を設定します。
+`vrt.yml` の env に Cloudfront の URL を格納する環境変数を設定します。
 
 ```diff vrt.yml
 env:
@@ -645,7 +646,7 @@ env:
 
 
 ## 3. regconfig.json の修正
-ACLが不要になったので `enableACL` に `false` を設定、 Cloudfront の URL を参照するようにしたので `customDomain` を設定します。
+ACL が不要になったので `enableACL` に `false` を設定、 Cloudfront の URL を参照するようにしたので `customDomain` を設定します。
 
 ```diff json:regconfig.json
 {
@@ -664,6 +665,6 @@ ACLが不要になったので `enableACL` に `false` を設定、 Cloudfront �
 # まとめ
 プロダクション運用を見据えた VRT 実行環境の構築について、実践したことを列挙してきました。  
 VRT について理解した後は運用面のことも考慮していきましょう。  
-特にS3に保存するデータは運用後にいつの間にか膨れ上がってコストに直結するので気を付けたいですね。
+特に S3 に保存するデータは運用後にいつの間にか膨れ上がってコストに直結するので気を付けたいですね。
 
 本記事が少しでも読者の皆様のお役に立てば幸いです🙇‍♂  
