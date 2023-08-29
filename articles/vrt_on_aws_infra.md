@@ -3,7 +3,7 @@ title: "【AWS】プロダクション運用を見据えた VRT 実行環境の�
 emoji: "📸"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["test", "vrt", "aws", "terraform", "frontend"]
-published: false
+published: true
 ---
 
 # はじめに
