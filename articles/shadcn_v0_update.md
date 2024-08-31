@@ -1,5 +1,5 @@
 ---
-title: "shadcn add コマンドを使って v0 で作成したコンポーネントを直接追加してみた"
+title: "shadcn add コマンドを使って v0 で作成したコンポーネントを追加してみた"
 emoji: "🚀"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["shadcnui", "v0", "vercel", "react", "frontend"]
