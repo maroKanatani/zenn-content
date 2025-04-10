@@ -1,6 +1,6 @@
 ---
 title: "Orvalのtransformerを使ってOpenAPIの定義ファイルを書き出す"
-emoji: "📱"
+emoji: "🐟️"
 type: "tech"
 topics: ["orval", "typescript", "openapi"]
 published: true
